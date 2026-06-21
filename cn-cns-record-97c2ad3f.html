@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>斗球 · 日常查询与对照</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafaf9;
+      color: #1c1917;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .page {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* header / hero */
+    .hero {
+      margin-bottom: 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: #292524;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #57534e;
+      max-width: 560px;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.02);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #1c1917;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #e7e5e4;
+      letter-spacing: -0.01em;
+    }
+
+    .card ul, .card p {
+      font-size: 0.95rem;
+      color: #44403c;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      padding: 0.3rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #a8a29e;
+    }
+
+    .card p + p {
+      margin-top: 0.6rem;
+    }
+
+    .card .tag {
+      display: inline-block;
+      background: #f5f5f4;
+      padding: 0.2rem 0.7rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      color: #57534e;
+      margin-bottom: 0.6rem;
+    }
+
+    /* 图片占位 / 主视觉 */
+    .visual-placeholder {
+      background: #f0efed;
+      border-radius: 28px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a8a29e;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 3.5rem;
+      border: 1px solid #e3e0dc;
+    }
+
+    /* 段落区域 */
+    .section {
+      margin-bottom: 3.2rem;
+    }
+
+    .section h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+      color: #292524;
+    }
+
+    .section p {
+      font-size: 0.98rem;
+      color: #44403c;
+      margin-bottom: 0.9rem;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .inline-link {
+      color: #57534e;
+      text-decoration: none;
+      border-bottom: 1px solid #d6d3d1;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #292524;
+      color: #1c1917;
+    }
+
+    /* FAQ 摘要 */
+    .faq-summary {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .faq-summary h3 {
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .faq-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-q {
+      font-weight: 470;
+      color: #292524;
+      min-width: 3.6rem;
+      flex-shrink: 0;
+    }
+
+    .faq-a {
+      color: #57534e;
+    }
+
+    /* 底部 */
+    .footer-note {
+      border-top: 1px solid #e7e5e4;
+      padding-top: 2rem;
+      font-size: 0.85rem;
+      color: #8c8882;
+      text-align: center;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      body {
+        padding: 2rem 1.2rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .visual-placeholder {
+        height: 150px;
+      }
+
+      .card {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .faq-summary {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>日常查询 · 对照 · 延伸</h1>
+    <p>一个关于斗球的信息卡片页，以轻量、克制的视角整理常用条目，方便随时查阅。</p>
+  </div>
+
+  <!-- 主视觉 —— 极简留白占位 -->
+  <div class="visual-placeholder">
+    ⚪ 斗球 · 信息卡片
+  </div>
+
+  <!-- 卡片区域 -->
+  <div class="card-grid">
+
+    <!-- 用途卡片 -->
+    <div class="card">
+      <span class="tag">常见用途</span>
+      <h2>查询与对照</h2>
+      <ul>
+        <li>快速浏览规则条目与术语</li>
+        <li>横向比较不同场景下的定义</li>
+        <li>检索基本概念和常见疑问</li>
+        <li>用于延伸阅读的起点</li>
+      </ul>
+    </div>
+
+    <!-- 适合人群 -->
+    <div class="card">
+      <span class="tag">适合人群</span>
+      <h2>日常使用者</h2>
+      <ul>
+        <li>想了解斗球基本框架的人</li>
+        <li>需要一份简洁参照表的爱好者</li>
+        <li>希望从概念延伸开去的读者</li>
+        <li>偏好轻量化信息结构的朋友</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- 自然链接段落 + 延伸阅读 -->
+  <div class="section">
+    <h3>从一条线索开始</h3>
+    <p>
+      许多时候我们并不需要一篇冗长的说明，而是希望有一个可以快速落地的参照点。<a href="https://cn-cns-douqiu.com" class="inline-link">斗球</a> 
+      这个词本身就是一个入口，借助它可以展开一系列相关概念和日常使用场景。把一个大主题拆解成若干可查询的卡片，是我个人比较习惯的方式。
+    </p>
+    <p>
+      下面整理了几条常见的提问摘要，它们不是标准定义，而是基于日常对话和查阅中沉淀下来的片段，适合用作延伸阅读的第一站。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要（克制、叙述感） -->
+  <div class="faq-summary">
+    <h3>一些片段 · 问题摘要</h3>
+    <div class="faq-item">
+      <span class="faq-q">Q1</span>
+      <span class="faq-a">斗球通常指代哪一类活动？—— 一般指向与球类规则、赛事、数据相关的集中查询场景，具体因语境而异。</span>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q2</span>
+      <span class="faq-a">日常对照时最常看什么？—— 主要是基础术语、常见分类以及不同来源之间的小差异，方便快速对齐理解。</span>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q3</span>
+      <span class="faq-a">有没有延伸推荐的路径？—— 可以从一个具体的条目出发，顺着关联卡片或外部链接继续翻阅，不设固定顺序。</span>
+    </div>
+  </div>
+
+  <!-- 另一个段落，进一步体现自然叙述 -->
+  <div class="section">
+    <h3>为什么用卡片作为载体</h3>
+    <p>
+      卡片的好处是边界清晰。一个主题一个区域，既不会让人迷失在长文本里，也方便回头再找。这次我试着把关于<a href="https://cn-cns-douqiu.com" class="inline-link">斗球</a> 
+      的碎片整理成几个小块：用途、人群、常见提问。它们之间没有严格的先后次序，更像是书架上几本相邻的书，抽哪一本都行。
+    </p>
+    <p>
+      如果你习惯在阅读时保留一点探索感，这种结构可能会比较顺手。每个卡片都可以视为一条独立的线索，可以顺着它继续深入，也可以暂时搁置，去看另一张卡片。
+    </p>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    信息卡片 · 斗球 · 日常查询与延伸
+  </div>
+
+</div>
+</body>
+</html>
